@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="StudyMate AI - Your personal AI-powered learning companion">
+    <title>StudyMate AI | Smart Learning</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i data-lucide="graduation-cap"></i>
+                </div>
+                <span>StudyMate<span class="brand-ai"> AI</span></span>
+            </div>
+
+            <div class="workspace-label">WORKSPACE</div>
+
+            <nav class="navigation">
+                <button class="nav-link active" data-page="dashboard">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Dashboard</span>
+                </button>
+
+                <button class="nav-link" data-page="notes">
+                    <i data-lucide="notebook-pen"></i>
+                    <span>My Notes</span>
+                </button>
+
+                <button class="nav-link" data-page="quiz">
+                    <i data-lucide="brain"></i>
+                    <span>Quiz Generator</span>
+                </button>
+
+                <button class="nav-link" data-page="flashcards">
+                    <i data-lucide="layers"></i>
+                    <span>Flashcards</span>
+                </button>
+
+                <button class="nav-link" data-page="planner">
+                    <i data-lucide="calendar-days"></i>
+                    <span>Study Planner</span>
+                </button>
+
+                <button class="nav-link" data-page="pdf">
+                    <i data-lucide="file-text"></i>
+                    <span>PDF Reader</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="upgrade-card">
+                    <div class="upgrade-icon">
+                        <i data-lucide="sparkles"></i>
+                    </div>
+                    <h3>Learn Smarter</h3>
+                    <p>Your personal learning journey starts here.</p>
+                </div>
+
+                <button class="nav-link" id="themeToggle">
+                    <i data-lucide="moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="icon-button menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                        <i data-lucide="menu"></i>
+                    </button>
+
+                    <div>
+                        <p class="greeting-small">YOUR LEARNING SPACE</p>
+                        <h2 id="pageTitle">Dashboard</h2>
+                    </div>
+                </div>
+
+                <div class="topbar-right">
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        Ready to learn
+                    </div>
+
+                    <button class="icon-button" id="quickTheme" aria-label="Toggle theme">
+                        <i data-lucide="sun"></i>
+                    </button>
+
+                    <div class="avatar">S</div>
+                </div>
+            </header>
+
+            <!-- PAGE CONTENT -->
+            <section class="page-content" id="pageContent">
+
+                <!-- DASHBOARD -->
+                <section class="page active" id="dashboard">
+                    <div class="welcome-section">
+                        <div>
+                            <span class="eyebrow">MONDAY MOTIVATION ✨</span>
+                            <h1>
+                                Welcome back,
+                                <span>Scholar!</span>
+                            </h1>
+                            <p>
+                                Ready to make today count?
+                                Let's learn something new.
+                            </p>
+                        </div>
+
+                        <button class="primary-button" id="startLearning">
+                            <i data-lucide="plus"></i>
+                            Start Learning
+                        </button>
+                    </div>
+
+                    <!-- STATS -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-top">
+                                <div class="stat-icon purple">
+                                    <i data-lucide="book-open"></i>
+                                </div>
+                                <span class="stat-label">TOTAL NOTES</span>
+                            </div>
+                            <h2 id="totalNotes">0</h2>
+                            <p>Saved study notes</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-top">
+                                <div class="stat-icon blue">
+                                    <i data-lucide="clock"></i>
+                                </div>
+                                <span class="stat-label">STUDY TIME</span>
+                            </div>
+                            <h2>0 <small>hrs</small></h2>
+                            <p>Keep building your habit</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-top">
+                                <div class="stat-icon green">
+                                    <i data-lucide="check-circle"></i>
+                                </div>
+                                <span class="stat-label">TASKS DONE</span>
+                            </div>
+                            <h2 id="completedTasks">0</h2>
+                            <p>Completed study tasks</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-top">
+                                <div class="stat-icon orange">
+                                    <i data-lucide="flame"></i>
+                                </div>
+                                <span class="stat-label">STREAK</span>
+                            </div>
+                            <h2>0 <small>days</small></h2>
+                            <p>Your learning consistency</p>
+                        </div>
+                    </div>
+
+                    <!-- DASHBOARD GRID -->
+                    <div class="dashboard-grid">
+                        <div class="panel quick-panel">
+                            <div class="panel-heading">
+                                <div>
+                                    <h3>Quick Actions</h3>
+                                    <p>What would you like to do today?</p>
+                                </div>
+                                <i data-lucide="zap"></i>
+                            </div>
+
+                            <div class="quick-actions">
+                                <button class="action-card" data-go="notes">
+                                    <div class="action-icon blue">
+                                        <i data-lucide="file-text"></i>
+                                    </div>
+                                    <h4>Create Notes</h4>
+                                    <p>Save your ideas</p>
+                                </button>
+
+                                <button class="action-card" data-go="quiz">
+                                    <div class="action-icon orange">
+                                        <i data-lucide="brain"></i>
+                                    </div>
+                                    <h4>Take Quiz</h4>
+                                    <p>Test your knowledge</p>
+                                </button>
+
+                                <button class="action-card" data-go="planner">
+                                    <div class="action-icon green">
+                                        <i data-lucide="calendar-check"></i>
+                                    </div>
+                                    <h4>Plan Study</h4>
+                                    <p>Organize your day</p>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- STUDY PROGRESS -->
+                        <div class="panel progress-panel">
+                            <div class="panel-heading">
+                                <div>
+                                    <h3>Study Progress</h3>
+                                    <p>Your productivity overview</p>
+                                </div>
+                                <i data-lucide="chart-no-axes-column"></i>
+                            </div>
+
+                            <div class="progress-empty">
+                                <div class="progress-circle">
+                                    <i data-lucide="graduation-cap"></i>
+                                </div>
+                                <h4>Your journey starts here!</h4>
+                                <p>Complete study tasks to see your progress.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RECENT NOTES -->
+                    <div class="panel recent-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Recent Notes</h3>
+                                <p>Your recently saved study materials</p>
+                            </div>
+
+                            <button class="text-button" data-go="notes">
+                                View All
+                                <i data-lucide="arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div id="recentNotes" class="empty-state">
+                            <i data-lucide="notebook-text"></i>
+                            <h4>No notes yet</h4>
+                            <p>Create your first study note to get started.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ADVANCED NOTES MANAGER -->
+                <section class="page" id="notes">
+                    <div class="page-intro notes-header">
+                        <div>
+                            <span class="eyebrow">YOUR KNOWLEDGE LIBRARY</span>
+                            <h1>
+                                My Notes
+                                <span class="brand-ai">✦</span>
+                            </h1>
+                            <p>Create, organize and manage your study materials.</p>
+                        </div>
+
+                        <div class="notes-count">
+                            <strong id="notesCount">0</strong>
+                            <span>Total Notes</span>
+                        </div>
+                    </div>
+
+                    <!-- NOTE EDITOR -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div>
+                                <h3 id="noteFormHeading">Create New Note</h3>
+                                <p>Capture your important learning points.</p>
+                            </div>
+                            <i data-lucide="notebook-pen"></i>
+                        </div>
+
+                        <form id="noteForm" class="note-form">
+                            <label for="noteTitle">Note Title</label>
+                            <input type="text" id="noteTitle" placeholder="e.g. JavaScript Fundamentals" maxlength="100"
+                                required>
+
+                            <label for="noteCategory">Subject Category</label>
+                            <select id="noteCategory" required>
+                                <option value="Programming">Programming</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Science">Science</option>
+                                <option value="English">English</option>
+                                <option value="Other">Other</option>
+                            </select>
+
+                            <label for="noteContent">Note Content</label>
+                            <textarea id="noteContent" placeholder="Write your study notes here..." maxlength="10000"
+                                required></textarea>
+
+                            <div class="editor-actions">
+                                <button type="submit" class="primary-button" id="saveNoteBtn">
+                                    <i data-lucide="save"></i>
+                                    Save Note
+                                </button>
+
+                                <button type="button" class="secondary-button" id="cancelEditBtn" hidden>
+                                    Cancel Edit
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- SEARCH AND FILTER -->
+                    <div class="notes-toolbar">
+                        <div class="search-box">
+                            <i data-lucide="search"></i>
+                            <input type="search" id="noteSearch" placeholder="Search your notes..."
+                                aria-label="Search notes">
+                        </div>
+
+                        <select id="categoryFilter" aria-label="Filter by category">
+                            <option value="all">All Subjects</option>
+                            <option value="Programming">Programming</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Science">Science</option>
+                            <option value="English">English</option>
+                            <option value="Other">Other</option>
+                        </select>
+
+                        <select id="noteSort" aria-label="Sort notes">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="az">Title A-Z</option>
+                            <option value="za">Title Z-A</option>
+                        </select>
+                    </div>
+
+                    <div class="notes-results-heading">
+                        <h3>Your Collection</h3>
+                        <span id="filteredNotesCount">0 notes</span>
+                    </div>
+
+                    <div id="notesList" class="notes-grid"></div>
+                </section>
+
+                <!-- ADVANCED QUIZ GENERATOR -->
+                <section class="page" id="quiz">
+                    <div class="page-intro">
+                        <span class="eyebrow">TEST YOUR KNOWLEDGE</span>
+                        <h1>Quiz Generator</h1>
+                        <p>Practice with questions created from your saved study notes.</p>
+                    </div>
+
+                    <div class="panel quiz-setup" id="quizSetup">
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Create Your Quiz</h3>
+                                <p>Choose a subject and number of questions.</p>
+                            </div>
+                            <i data-lucide="brain"></i>
+                        </div>
+
+                        <form id="quizForm" class="quiz-form">
+                            <label for="quizCategory">Select Subject</label>
+                            <select id="quizCategory" required>
+                                <option value="all">All Subjects</option>
+                                <option value="Programming">Programming</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Science">Science</option>
+                                <option value="English">English</option>
+                                <option value="Other">Other</option>
+                            </select>
+
+                            <label for="quizQuestionCount">Number of Questions</label>
+                            <select id="quizQuestionCount">
+                                <option value="5">5 Questions</option>
+                                <option value="10">10 Questions</option>
+                                <option value="15">15 Questions</option>
+                            </select>
+
+                            <button type="submit" class="primary-button">
+                                <i data-lucide="play"></i>
+                                Generate Quiz
+                            </button>
+                        </form>
+
+                        <p id="quizSetupMessage" class="quiz-message">
+                            Save notes first to generate a quiz.
+                        </p>
+                    </div>
+
+                    <!-- ACTIVE QUIZ -->
+                    <div class="panel quiz-game" id="quizGame" hidden>
+                        <div class="quiz-progress-header">
+                            <span id="quizProgressText">Question 1 of 5</span>
+                            <span id="quizScoreLive">Score: 0</span>
+                        </div>
+
+                        <div class="quiz-progress-track">
+                            <div id="quizProgressBar"></div>
+                        </div>
+
+                        <div class="quiz-question-area">
+                            <span id="quizSubjectBadge" class="quiz-subject-badge">Programming</span>
+                            <h2 id="quizQuestion">Question appears here</h2>
+                            <div id="quizOptions" class="quiz-options"></div>
+                            <p id="quizFeedback" class="quiz-feedback" aria-live="polite"></p>
+                        </div>
+
+                        <div class="quiz-game-actions">
+                            <button type="button" id="quizExit" class="secondary-button">Exit Quiz</button>
+                            <button type="button" id="quizNext" class="primary-button" disabled>
+                                Next Question
+                                <i data-lucide="arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- QUIZ RESULT -->
+                    <div class="panel quiz-result" id="quizResult" hidden>
+                        <div class="quiz-result-icon">
+                            <i data-lucide="trophy"></i>
+                        </div>
+
+                        <h2>Quiz Completed!</h2>
+                        <p id="quizResultMessage">Well done!</p>
+
+                        <div class="quiz-result-stats">
+                            <div>
+                                <strong id="quizFinalScore">0/5</strong>
+                                <span>Score</span>
+                            </div>
+                            <div>
+                                <strong id="quizPercentage">0%</strong>
+                                <span>Accuracy</span>
+                            </div>
+                            <div>
+                                <strong id="quizCorrectAnswers">0</strong>
+                                <span>Correct</span>
+                            </div>
+                        </div>
+
+                        <button type="button" id="quizRestart" class="primary-button">
+                            <i data-lucide="refresh-cw"></i>
+                            Create Another Quiz
+                        </button>
+                    </div>
+
+                    <!-- QUIZ HISTORY -->
+                    <div class="panel quiz-history">
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Quiz History</h3>
+                                <p>Your previous quiz performances.</p>
+                            </div>
+                            <i data-lucide="history"></i>
+                        </div>
+
+                        <div id="quizHistoryList">
+                            <p class="quiz-history-empty">No quiz attempts yet.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FLASHCARDS -->
+                <section class="page" id="flashcards">
+                    <div class="page-intro">
+                        <span class="eyebrow">ACTIVE RECALL</span>
+                        <h1>Flashcards Studio</h1>
+                        <p>Create, review and master important concepts with flashcards.</p>
+                    </div>
+
+                    <div class="flashcard-stats" id="flashcard-stats">
+                        <div class="flashcard-stat">
+                            <span>Total Cards</span>
+                            <strong id="fcTotalCount">0</strong>
+                        </div>
+                        <div class="flashcard-stat">
+                            <span>Mastered</span>
+                            <strong id="fcMasteredCount">0</strong>
+                        </div>
+                        <div class="flashcard-stat">
+                            <span>Need Practice</span>
+                            <strong id="fcRemainingCount">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div>
+                                <h3 id="fcFormHeading">Create a Flashcard</h3>
+                                <p>Add a question and its answer to your collection.</p>
+                            </div>
+                            <i data-lucide="layers"></i>
+                        </div>
+
+                        <form id="flashcardForm" class="fc-form-grid">
+                            <div class="fc-field">
+                                <label for="fcSubject">Subject</label>
+                                <select id="fcSubject" required>
+                                    <option value="Programming">Programming</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Mathematics">Mathematics</option>
+                                    <option value="Science">Science</option>
+                                    <option value="English">English</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="fc-field">
+                                <label for="fcQuestion">Question / Front</label>
+                                <textarea id="fcQuestion" rows="3" maxlength="1000" placeholder="Enter your question..."
+                                    required></textarea>
+                            </div>
+
+                            <div class="fc-field">
+                                <label for="fcAnswer">Answer / Back</label>
+                                <textarea id="fcAnswer" rows="3" maxlength="3000" placeholder="Enter the answer..."
+                                    required></textarea>
+                            </div>
+
+                            <div class="editor-actions">
+                                <button type="submit" class="primary-button" id="fcSaveBtn">
+                                    <i data-lucide="save"></i> Save Flashcard
+                                </button>
+                                <button type="button" class="secondary-button" id="fcCancelEdit" hidden>
+                                    Cancel Edit
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="flashcard-toolbar">
+                        <div>
+                            <h3>Study Cards</h3>
+                            <p id="fcFilteredCount">0 cards</p>
+                        </div>
+
+                        <select id="fcFilter" aria-label="Filter flashcards by subject">
+                            <option value="all">All Subjects</option>
+                            <option value="Programming">Programming</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Science">Science</option>
+                            <option value="English">English</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="panel flashcard-study-panel" id="fcStudyPanel">
+                        <div class="fc-study-top">
+                            <span id="fcStudySubject">No subject</span>
+                            <span id="fcPosition">0 / 0</span>
+                        </div>
+
+                        <div class="fc-progress-track">
+                            <div id="fcProgressBar"></div>
+                        </div>
+
+                        <button type="button" class="flashcard-display" id="fcFlipCard"
+                            aria-label="Flip flashcard to reveal answer">
+                            <span class="fc-side-label" id="fcSideLabel">QUESTION</span>
+                            <span id="fcCardContent">Add a flashcard to begin studying.</span>
+                            <span class="fc-flip-hint">Click card to flip</span>
+                        </button>
+
+                        <div class="fc-study-actions">
+                            <button type="button" class="secondary-button" id="fcPrevious">
+                                <i data-lucide="chevron-left"></i> Previous
+                            </button>
+                            <button type="button" class="secondary-button" id="fcNext">
+                                Next <i data-lucide="chevron-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="fc-review-actions">
+                            <button type="button" class="fc-practice-btn" id="fcPractice">
+                                <i data-lucide="refresh-cw"></i> Need Practice
+                            </button>
+                            <button type="button" class="fc-master-btn" id="fcMaster">
+                                <i data-lucide="check-circle"></i> Mark Mastered
+                            </button>
+                        </div>
+
+                        <p id="fcStudyMessage" class="fc-study-message" aria-live="polite"></p>
+                    </div>
+
+                    <div class="flashcard-toolbar">
+                        <div>
+                            <h3>My Collection</h3>
+                            <p>Manage your saved flashcards.</p>
+                        </div>
+                    </div>
+
+                    <div id="fcCollection" class="fc-collection"></div>
+                </section>
+
+                <!-- STUDY PLANNER -->
+                <section class="page" id="planner">
+                    <div class="page-intro">
+                        <h1>Study Planner</h1>
+                        <p>Plan your goals and stay consistent.</p>
+                    </div>
+
+                    <div class="panel">
+                        <form id="taskForm" class="task-form">
+                            <input type="text" id="taskInput" placeholder="What do you need to study?" required>
+                            <input type="date" id="taskDate" required>
+                            <button type="submit" class="primary-button">
+                                <i data-lucide="plus"></i>
+                                Add Task
+                            </button>
+                        </form>
+
+                        <div id="taskList" class="task-list"></div>
+                    </div>
+                </section>
+
+                <!-- PDF UPLOAD & READER -->
+                <section class="page" id="pdf">
+                    <div class="page-intro pdf-header">
+                        <div>
+                            <span class="eyebrow">YOUR DIGITAL LIBRARY</span>
+                            <h1>PDF Reader</h1>
+                            <p>Upload, organize and read your study PDFs.</p>
+                        </div>
+                    </div>
+
+                    <!-- PDF UPLOAD -->
+                    <div class="pdf-upload-card">
+                        <div class="pdf-upload-icon">
+                            <i data-lucide="file-up"></i>
+                        </div>
+                        <h3>Upload Study PDF</h3>
+                        <p>Select a PDF file from your device.</p>
+
+                        <label for="pdfFile" class="pdf-upload-button">
+                            <i data-lucide="upload"></i>
+                            Choose PDF
+                        </label>
+
+                        <input type="file" id="pdfFile" accept="application/pdf,.pdf" hidden>
+
+                        <p id="pdfUploadStatus" class="pdf-status">PDF files only</p>
+                    </div>
+
+                    <!-- PDF READER -->
+                    <div class="pdf-reader-card">
+                        <div class="pdf-document-heading">
+                            <div>
+                                <h3 id="pdfFileName">No PDF selected</h3>
+                                <p id="pdfPageInfo">Upload a PDF to start reading.</p>
+                            </div>
+                        </div>
+
+                        <div class="pdf-controls">
+                            <button type="button" id="pdfPrev" class="pdf-control-btn" disabled>
+                                <i data-lucide="chevron-left"></i>
+                                Previous
+                            </button>
+
+                            <div class="pdf-page-control">
+                                <input type="number" id="pdfPageNumber" min="1" value="1" aria-label="Page number"
+                                    disabled>
+                                <span id="pdfTotalPages">/ 0</span>
+                            </div>
+
+                            <button type="button" id="pdfNext" class="pdf-control-btn" disabled>
+                                Next
+                                <i data-lucide="chevron-right"></i>
+                            </button>
+
+                            <div class="pdf-zoom-controls">
+                                <button type="button" id="pdfZoomOut" class="pdf-control-btn" disabled
+                                    aria-label="Zoom out">
+                                    <i data-lucide="minus"></i>
+                                </button>
+
+                                <span id="pdfZoomValue">100%</span>
+
+                                <button type="button" id="pdfZoomIn" class="pdf-control-btn" disabled
+                                    aria-label="Zoom in">
+                                    <i data-lucide="plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- PDF CANVAS -->
+                        <div id="pdfCanvasContainer" class="pdf-canvas-container">
+                            <div id="pdfEmptyState" class="pdf-empty">
+                                <i data-lucide="file-text"></i>
+                                <h3>Your PDF will appear here</h3>
+                                <p>Upload a study PDF to begin reading.</p>
+                            </div>
+
+                            <canvas id="pdfCanvas" hidden></canvas>
+                        </div>
+                    </div>
+
+                    <!-- PDF LIBRARY -->
+                    <div class="pdf-library-card">
+                        <div class="pdf-library-heading">
+                            <div>
+                                <h3>My PDF Library</h3>
+                                <p>Your saved study documents</p>
+                            </div>
+                            <span id="pdfLibraryCount">0 PDFs</span>
+                        </div>
+
+                        <div id="pdfLibraryList" class="pdf-library-list">
+                            <p class="pdf-empty-library">No saved PDFs yet.</p>
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="footer">
+                <p>© 2026 StudyMate AI. Made for curious minds. ✨</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- PDF.JS LIBRARY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <!-- PDF READER JAVASCRIPT -->
+    <script src="js/pdf-reader.js"></script>
+
+    <!-- QUIZ GENERATOR JAVASCRIPT -->
+    <script src="js/quiz.js"></script>
+
+    <!-- FLASHCARDS JAVASCRIPT -->
+    <script src="js/flashcards.js"></script>
+
+    <!-- LUCIDE ICONS -->
+    <script>lucide.createIcons();</script>
+
+    <!-- Study Tracker -->
+    <script src="js/study-tracker.js"></script>
+
+    <!-- POMODORO FOCUS MODE -->
+    <script src="js/pomodoro.js"></script>
+
+    <!-- ACHIEVEMENTS JAVASCRIPT -->
+    <script src="js/achievements.js"></script>
+
+    <!--study-reports-->
+    <script src="js/study-reports.js"></script> 
+</body>
+
+</html>
